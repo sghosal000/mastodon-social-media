@@ -7,6 +7,7 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
@@ -19,8 +20,6 @@ const Login = () => {
                 navigate("/")
             }
         } catch (error) {
-            // console.error(error)
-            // console.log(error.response.data.message);
             if (!error.response) {
                 setMessage('No Server response')
             } else if (error.response.status === 400) {
@@ -38,11 +37,8 @@ const Login = () => {
         }
     }
 
-    const handleKeyPress = (e) => {
-        if (e.key === "Tab") {
-            document.getElementById("password").focus();
-            e.preventDefault(); // Prevent default tab behavior
-        }
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible)
     }
 
     return (
@@ -65,7 +61,7 @@ const Login = () => {
                         <p className="text-center text-xs text-light-red">{message}</p>
                     </div>
                     <div>
-                        <label htmlFor="username" className="form-label">Email Addess</label>
+                        <label htmlFor="username" className="form-label">Email Address</label>
                         <input
                             type="email"
                             id="username"
@@ -74,22 +70,27 @@ const Login = () => {
                             onChange={(e) => setUsername(e.target.value)}
                             className="form-field"
                             autoFocus
-                            onKeyDown={handleKeyPress}
                             required
                         />
                     </div>
-                    <div>
+                    <div className="relative">
                         <div className="flex items-center justify-between">
                             <label htmlFor="password" className="form-label">Password</label>
                         </div>
                         <input
-                            type="password"
+                            type={passwordVisible ? "text" : "password"}
                             id="password"
                             value={password}
                             placeholder="Enter password"
                             onChange={(e) => setPassword(e.target.value)}
                             className="form-field"
                             required
+                        />
+                        <img
+                            src={passwordVisible ? "https://www.svgrepo.com/show/525332/eye-closed.svg" : "https://www.svgrepo.com/show/521139/eye-show.svg"}
+                            alt={passwordVisible ? "Hide" : "Show"}
+                            className="absolute right-3 top-8 w-6 cursor-pointer opacity-70"
+                            onClick={togglePasswordVisibility}
                         />
                     </div>
                     <div className="mt-auto mb-4 md:mt-4">
@@ -101,7 +102,7 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
-            </div >
+            </div>
         </div>
     );
 };
