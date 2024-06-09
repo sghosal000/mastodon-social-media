@@ -46,10 +46,10 @@ const Login = () => {
     }
 
     return (
-        <div className="content-center">
-            <div className="mx-auto lg:max-w-lg">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img src="https://joinmastodon.org/logos/logo-purple.svg" alt="logo" className="mx-auto" />
+        <div className="w-full flex justify-center">
+            <div className="min-h-screen flex flex-col items-center w-full md:max-w-lg">
+                <div className="px-auto w-full max-w-sm">
+                    <img src="https://joinmastodon.org/logos/logo-purple.svg" alt="logo" className="mx-auto my-10 w-12" />
                     <h2 className="mt-4 text-center text-xl font-bold">
                         Login to mastodon.social
                     </h2>
@@ -58,7 +58,7 @@ const Login = () => {
                     </h1>
                 </div>
                 <form
-                    className="space-y-6 md:p-10"
+                    className="w-full h-full flex flex-col gap-y-4 p-4 md:p-10"
                     onSubmit={handleSubmit}
                 >
                     <div className="h-1">
@@ -92,15 +92,17 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="form-submit text-white"
-                    >
-                        Login
-                    </button>
+                    <div className="mt-auto mb-4 md:mt-4">
+                        <button
+                            type="submit"
+                            className="form-submit text-white"
+                        >
+                            Login
+                        </button>
+                    </div>
                 </form>
             </div >
-        </div >
+        </div>
     );
 };
 

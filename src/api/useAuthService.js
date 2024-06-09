@@ -9,18 +9,17 @@ const useAuthService = () => {
     const { setAccessToken } = useAuth()
 
     const login = async (id, password) => {
-        const credentials ={
+        const credentials = {
+            grant_type: "client_credentials",
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
-            grant_type: "client_credentials",
             username: id,
             password: password
         }
 
         try {
-            const res = await axios.post(`/oauth/token`, credentials, { withCredentials: true });
+            const res = await axios.post(`/oauth/token`, credentials);
             const { access_token } = res.data
-            console.log(access_token)
             setAccessToken(access_token)
 
             return { status: true }
